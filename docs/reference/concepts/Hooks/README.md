@@ -2,3 +2,56 @@
     - allows
         - adding arbitrary behaviors | flag evaluation life-cycle
           - *Example:* validate a resolved flag value, modify data  | evaluation context, logging, telemetry, tracking
+    - can be attached
+      - globally == OpenFeature API object — API —
+      - at client — Client —
+      - at flag invocation level — Invocation — 
+    - can implement ≥ 1 flag evaluation lifecycle’s stages
+
+- Flag evaluation life cycle 👁️in order of evaluation 👁️
+  - `Before`
+    - uses
+      - alter Evaluation Context
+    - evaluation order
+      - API
+      - Client
+      - Invocation
+  - `After`
+    - requirements
+      - 👁️flag evaluation has been done successfully 👁️
+    - uses
+      - validate resolved flag value
+      - publish records in other services for
+        - telemetry
+        - tracking
+    - evaluation order
+      - Invocation
+      - Client
+      - API
+  - `Error`
+    - requirements
+      - 👁️flag evaluation has been done abnormally 👁️
+        - possible reasons
+          - flag control plane was NOT reached
+          - flag — by flag key — does NOT exist
+          - flag’s type — by flag key — ≠ expected type
+          - unhandled error during `Before`
+    - uses
+      - log error messages
+      - add records — to a — telemetry provider
+    - evaluation order
+      - Invocation
+      - Client
+      - API
+  - `Finally` / `finallyAfter`
+    - always executed
+    - uses
+      - release resources
+      - finalize records
+    - evaluation order
+      - Invocation
+      - Client
+      - API
+
+## Examples
+* TODO:
