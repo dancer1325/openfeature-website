@@ -1,0 +1,6 @@
+- == part / used by an application author
+- allows
+    - developers can
+        - evaluate feature flags
+        - based on them — to impact — application
+- == framework
