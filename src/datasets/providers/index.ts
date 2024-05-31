@@ -3,6 +3,7 @@ import type { ComponentType, SVGProps } from 'react';
 import { CloudBees } from './cloudbees';
 import { ConfigCat } from './configcat';
 import { DevCycle } from './devcycle';
+import { EnvVar } from './env-var';
 import { Flagd } from './flagd';
 import { Flagsmith } from './flagsmith';
 import { Flipt } from './flipt';
@@ -16,12 +17,14 @@ import { Unleash } from './unleash';
 import { Statsig } from './statsig';
 import { FeatBit } from './featbit';
 import { UserDefaults } from './user-defaults';
+import { GrowthBook } from './growthbook';
 import { Category, EcosystemElement, Technology } from '../types';
 
 export const PROVIDERS: Provider[] = [
   CloudBees,
   ConfigCat,
   DevCycle,
+  EnvVar,
   FeatBit,
   Flagd,
   Flagsmith,
@@ -35,6 +38,7 @@ export const PROVIDERS: Provider[] = [
   Statsig,
   Unleash,
   UserDefaults,
+  GrowthBook,
 ];
 
 export const ECOSYSTEM_PROVIDERS: EcosystemElement[] = PROVIDERS.map((provider) => {
