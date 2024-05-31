@@ -1,0 +1,5 @@
+- := container for arbitrary contextual data
+  - **Note:** static data (*Example:* host or applicationId) can be configured globally
+- uses
+    - basis for dynamic evaluation
+      - *Example:* IP address of the client in a web application
