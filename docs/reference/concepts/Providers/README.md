@@ -1,4 +1,5 @@
 - == abstraction between flag management system — & — OpenFeature SDK
+  - → flag evaluation logic can be changed / NO major code refactor needed
 - allows
     - evaluating the flag
         - ways
@@ -13,3 +14,5 @@
         - if you try to register an additional provider → previous is overwritten
         - if NO provider configured → default one
         - registered — via — Evaluation API
+- How to implement a provider?
+  - TODO:
