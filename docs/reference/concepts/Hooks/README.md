@@ -1,0 +1,4 @@
+- := mechanism /
+    - allows
+        - adding arbitrary behaviors | flag evaluation life-cycle
+          - *Example:* validate a resolved flag value, modify data  | evaluation context, logging, telemetry, tracking
