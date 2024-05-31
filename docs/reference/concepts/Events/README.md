@@ -1,3 +1,19 @@
 - allows
     - if state changes in provider OR flag management system — react to
     *Example:* provider readiness, error status, flag configuration changes
+- Check
+  - '/spec/Types and data structures'
+- event handlers
+  - receive Event Details
+  - can be attached to
+    - client
+      - requirement
+        - provider / bound with the client — emits — associated event
+      - uses
+        - application domain logic
+    - globally == OpenFeature API object — API —
+      - requirement
+        - provider emits the associated event
+      - uses
+        - configuration troubleshooting
+        - monitoring
