@@ -1,0 +1,15 @@
+- == abstraction between flag management system — & — OpenFeature SDK
+- allows
+    - evaluating the flag
+        - ways
+            - wrap a vendor SDK / — call to — Evaluation API
+            - parse a locally stored file
+- how to register them?
+    - Application Integrator register globally 1 provider / time
+        - globally
+            - == changes affect OpenFeature clients
+                - existing
+                - new
+        - if you try to register an additional provider → previous is overwritten
+        - if NO provider configured → default one
+        - registered — via — Evaluation API
