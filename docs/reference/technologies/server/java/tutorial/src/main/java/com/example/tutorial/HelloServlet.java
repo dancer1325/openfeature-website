@@ -19,6 +19,7 @@ import dev.openfeature.sdk.OpenFeatureAPI;
 import dev.openfeature.sdk.Value;
 import dev.openfeature.sdk.providers.memory.Flag;
 import dev.openfeature.sdk.providers.memory.InMemoryProvider;
+import io.opentelemetry.api.trace.TracerProvider;
 
 @WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
@@ -44,7 +45,9 @@ public class HelloServlet extends HttpServlet {
         // 1.1 syn
         api.setProviderAndWait(new InMemoryProvider(myFlags));
         // 1.2 async
-//        api.setProvider(new InMemoryProvider(myFlags));
+        // api.setProvider(new InMemoryProvider(myFlags));
+        // 1.3 with an associated named client
+        api.setProvider("clientForCache", new InMemoryProvider(myFlags));
         // 2. pas the EvaluationContext
         api.setEvaluationContext(apiCtx);
         // add a hook globally, to run on all evaluations
@@ -56,6 +59,8 @@ public class HelloServlet extends HttpServlet {
         client.setEvaluationContext(apiCtx);
         // add a hook on this client, to run on all evaluations made by this client
         client.addHooks(new TracesHook());
+        // 2. namedClient
+        Client clientNamed = api.getClient("clientForCache");
 
         // set a value to the invocation context
         // TODO: How to get session?
@@ -64,7 +69,8 @@ public class HelloServlet extends HttpServlet {
         requestAttrs.put("product", new Value("productId"));
         String targetingKey = session.getId();
         EvaluationContext reqCtx = new ImmutableContext(targetingKey, requestAttrs);
-*/
+        */
+
         // get a bool flag value
         boolean flagValue = client.getBooleanValue("v2_enabled", false);
         // TODO: Once I get where session comes from
