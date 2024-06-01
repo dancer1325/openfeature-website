@@ -7,6 +7,8 @@
       * uses
         * client -- is associated with a -- particular provider
           * if there is NO provider / that name -- associate to -- global provider
+* Extending
+  * TODO:
 
 ## Tutorial
 * Check '/tutorial'
