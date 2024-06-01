@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import dev.openfeature.contrib.hooks.otel.TracesHook;
 import dev.openfeature.sdk.Client;
 import dev.openfeature.sdk.EvaluationContext;
+import dev.openfeature.sdk.EventDetails;
 import dev.openfeature.sdk.FlagEvaluationOptions;
 import dev.openfeature.sdk.ImmutableContext;
 import dev.openfeature.sdk.OpenFeatureAPI;
@@ -42,7 +43,7 @@ public class HelloServlet extends HttpServlet {
 
         OpenFeatureAPI api = OpenFeatureAPI.getInstance();
         // 1. configure a provider
-        // 1.1 syn
+        // 1.1 sync
         api.setProviderAndWait(new InMemoryProvider(myFlags));
         // 1.2 async
         // api.setProvider(new InMemoryProvider(myFlags));
@@ -52,6 +53,10 @@ public class HelloServlet extends HttpServlet {
         api.setEvaluationContext(apiCtx);
         // add a hook globally, to run on all evaluations
         api.addHooks(new TracesHook());
+        // 3. set eventHandler on api
+        api.onProviderStale((EventDetails eventDetails) -> {
+            log(eventDetails.getMessage());
+        });
 
         // create a client
         Client client = api.getClient();
@@ -61,6 +66,10 @@ public class HelloServlet extends HttpServlet {
         client.addHooks(new TracesHook());
         // 2. namedClient
         Client clientNamed = api.getClient("clientForCache");
+        // 3. set eventHandler on client
+        client.onProviderStale((EventDetails eventDetails) -> {
+            log(eventDetails.getMessage());
+        });
 
         // set a value to the invocation context
         // TODO: How to get session?

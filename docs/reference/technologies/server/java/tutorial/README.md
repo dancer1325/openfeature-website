@@ -14,3 +14,22 @@
 ## Notes
 * Add [OpenTelemetry hook](https://github.com/open-feature/java-sdk-contrib/tree/main/hooks/open-telemetry)
   * [how to use](https://github.com/open-feature/java-sdk-contrib/tree/main/hooks/open-telemetry)
+* provider
+  * configure on API level
+  * types
+    * sync
+    * async
+    * -- associated to a -- named client
+* targeting
+  * == dynamic criteria about the subject of flag evaluation
+  * -- provided via -- evaluation context
+* hooks
+  * on
+    * API
+    * Client
+    * flag invocation
+* named client
+  * -- can be associated with a -- provider
+* event handler on
+  * API
+  * client
