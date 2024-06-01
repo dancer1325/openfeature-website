@@ -33,3 +33,6 @@
 * event handler on
   * API
   * client
+* shutdown ALL registered providers
+  * uses
+    * when you want to shut down the application

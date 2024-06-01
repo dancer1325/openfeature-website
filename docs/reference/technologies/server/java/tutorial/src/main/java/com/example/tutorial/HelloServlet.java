@@ -57,6 +57,8 @@ public class HelloServlet extends HttpServlet {
         api.onProviderStale((EventDetails eventDetails) -> {
             log(eventDetails.getMessage());
         });
+        // 4. cleanup of ALL registered providers
+        //api.shutdown();
 
         // create a client
         Client client = api.getClient();
