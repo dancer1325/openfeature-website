@@ -52,6 +52,7 @@
       - Invocation
       - Client
       - API
+- [Available](https://openfeature.dev/ecosystem/?instant_search%5BrefinementList%5D%5Btype%5D%5B0%5D=Hook)
 
 ## Examples
 * TODO:
