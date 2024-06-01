@@ -36,3 +36,4 @@
 * shutdown ALL registered providers
   * uses
     * when you want to shut down the application
+* transaction context and propagator

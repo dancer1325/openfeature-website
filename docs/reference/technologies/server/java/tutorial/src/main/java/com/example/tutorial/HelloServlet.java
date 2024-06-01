@@ -17,6 +17,7 @@ import dev.openfeature.sdk.EventDetails;
 import dev.openfeature.sdk.FlagEvaluationOptions;
 import dev.openfeature.sdk.ImmutableContext;
 import dev.openfeature.sdk.OpenFeatureAPI;
+import dev.openfeature.sdk.ThreadLocalTransactionContextPropagator;
 import dev.openfeature.sdk.Value;
 import dev.openfeature.sdk.providers.memory.Flag;
 import dev.openfeature.sdk.providers.memory.InMemoryProvider;
@@ -39,6 +40,9 @@ public class HelloServlet extends HttpServlet {
         Map<String, Value> apiAttrs = new HashMap<>();
         apiAttrs.put("region", new Value(System.getenv("us-east-1")));
         EvaluationContext apiCtx = new ImmutableContext(apiAttrs);
+        Map<String, Value> transactionAttrs = new HashMap<>();
+        transactionAttrs.put("userId", new Value("userId"));
+        EvaluationContext transactionCtx = new ImmutableContext(transactionAttrs);
 
 
         OpenFeatureAPI api = OpenFeatureAPI.getInstance();
@@ -59,6 +63,11 @@ public class HelloServlet extends HttpServlet {
         });
         // 4. cleanup of ALL registered providers
         //api.shutdown();
+        // 5. transaction context & propagator        -- NoOpTransactionContextPropagator     by default --
+        api.setTransactionContext(transactionCtx);
+        api.setTransactionContextPropagator(new ThreadLocalTransactionContextPropagator());
+
+
 
         // create a client
         Client client = api.getClient();
