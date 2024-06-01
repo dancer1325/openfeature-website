@@ -12,4 +12,5 @@
 * Open in your desired browser 'http://localhost:8080/tutorial-1.0-SNAPSHOT' and navigate to the other path
 
 ## Notes
-* 
+* Add [OpenTelemetry hook](https://github.com/open-feature/java-sdk-contrib/tree/main/hooks/open-telemetry)
+  * [how to use](https://github.com/open-feature/java-sdk-contrib/tree/main/hooks/open-telemetry)

@@ -10,8 +10,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import dev.openfeature.contrib.hooks.otel.TracesHook;
 import dev.openfeature.sdk.Client;
 import dev.openfeature.sdk.EvaluationContext;
+import dev.openfeature.sdk.FlagEvaluationOptions;
 import dev.openfeature.sdk.ImmutableContext;
 import dev.openfeature.sdk.OpenFeatureAPI;
 import dev.openfeature.sdk.Value;
@@ -45,11 +47,15 @@ public class HelloServlet extends HttpServlet {
 //        api.setProvider(new InMemoryProvider(myFlags));
         // 2. pas the EvaluationContext
         api.setEvaluationContext(apiCtx);
+        // add a hook globally, to run on all evaluations
+        api.addHooks(new TracesHook());
 
         // create a client
         Client client = api.getClient();
         // 1. set EvaluationContext
         client.setEvaluationContext(apiCtx);
+        // add a hook on this client, to run on all evaluations made by this client
+        client.addHooks(new TracesHook());
 
         // set a value to the invocation context
         // TODO: How to get session?
@@ -63,6 +69,8 @@ public class HelloServlet extends HttpServlet {
         boolean flagValue = client.getBooleanValue("v2_enabled", false);
         // TODO: Once I get where session comes from
         //boolean flagValue = client.getBooleanValue("v2_enabled", false, reqCtx);
+        // add hook at flag invocation level
+        //boolean flagValue = client.getBooleanValue("v2_enabled", false, null,  FlagEvaluationOptions.builder().hook(new TracesHook()).build());
         message = flagValue ? "Hello World! - v2_enabled" : "Bye World! - v2_enabled";
     }
 
